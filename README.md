@@ -1,1 +1,2 @@
 - dangerouslySetInnerHTML
+- the original json file, the type of category is number "https://opentdb.com/api.php?amount=10&category=9", but at first, I thought it mst be string, but after double check the API structure, I find out that the type of Category's parameter should be number!

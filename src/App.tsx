@@ -2,14 +2,14 @@ import React, {ChangeEvent, FC, MouseEvent, useState} from 'react';
 import ConditionBoard from './components/ConditionBoard/ConditionBoard';
 import useFetchData from "./hooks/useFetchData";
 
-const TOTAL_QUESTIONS = 10
 const App: FC = () => {
 	const [loading, setLoading] = useState(false)
 	const [gameOver, setGameOver] = useState(true)
 	const [formData, setFormData] = useState<FormProps>({
+		amount: 10,
 		type: 'multiple',
 		difficulty: 'easy',
-		category: 'general_knowledge'
+		category: 9
 	})
 	const [quiz, setQuiz] = useState<QuizProps>({
 		questions: [],
@@ -18,7 +18,9 @@ const App: FC = () => {
 		score: 0,
 	})
 
-	// const x = useFetchData()
+	const x = useFetchData(formData)
+	console.log("here we go")
+	console.log(x)
 
 	const startTrivia = async () => {
 		setLoading(true)
@@ -36,9 +38,12 @@ const App: FC = () => {
 
 	}
 
-	const handleConditionChange = (e: ChangeEvent<HTMLFormElement | HTMLInputElement>) => {
+	const handleConditionChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
 		const {name, value} = e.target
 		setFormData(form => ({...form, [name]: value}))
+		console.log("changed")
+		console.log(name)
+		console.log(value)
 	}
 
 	return (

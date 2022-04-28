@@ -1,14 +1,18 @@
 import React, {FC} from 'react';
-import {Categories, Types, Difficulties} from "../../hooks/constraints";
+import {Categories, Types, Difficulties, QuestionAmount} from "../../hooks/constraints";
 
 const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) => {
 	return (
 		<form>
-			<label htmlFor="category"> Category: <br/>
-				<select id="category" name="category">
-					{Categories.map(c => <option key={c.value} value={c.value}>{c.name}</option>)}
-				</select>
-			</label>
+			<label htmlFor="category"> Category: </label>
+			<select id="category" name="category" onChange={handleConditionChange}>
+				{Categories.map(c => <option key={c.value} value={c.value}>{c.name}</option>)}
+			</select>
+			<br/>
+			<label htmlFor="amount"> Question Amount: </label>
+			<select id="amount" name="amount" onChange={handleConditionChange}>
+				{QuestionAmount.map(q => <option key={q.value} value={q.name}>{q.name}</option>)}
+			</select>
 			<fieldset>
 				<legend>Type</legend>
 				{

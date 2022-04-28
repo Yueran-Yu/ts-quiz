@@ -27,7 +27,6 @@ interface QuizProps {
 	score: number,
 }
 
-
 interface AnswerObject {
 	question: string
 	answer: string
@@ -37,13 +36,13 @@ interface AnswerObject {
 
 interface ConditionBoardProps {
 	form: FormProps
-	handleConditionChange: (e: React.ChangeEvent<HTMLFormElement|HTMLInputElement>) => void
-
+	handleConditionChange: (e: React.ChangeEvent<HTMLSelectElement|HTMLInputElement>) => void
 }
 
 interface FormProps {
-	type: string
-	difficulty: string
-	category: string
+	amount?:number
+	type?: string
+	difficulty?: string
+	category?: number
 }
 

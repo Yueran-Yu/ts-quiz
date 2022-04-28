@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import {shuffleArray} from "../utils";
 
-const useFetchData = (amount: number, difficulty: {}, type: {}) => {
+const useFetchData = ({amount, type, difficulty, category}: FormProps) => {
 	const [data, setData] = useState<QuestionProps>(
 		{
 			category: "",
@@ -22,8 +22,9 @@ const useFetchData = (amount: number, difficulty: {}, type: {}) => {
 			baseURL: "https://opentdb.com/api.php?",
 			params: {
 				amount,
-				difficulty,
-				type
+				category,
+				type,
+				difficulty
 			}
 		}
 		axios.request(options)
@@ -35,7 +36,7 @@ const useFetchData = (amount: number, difficulty: {}, type: {}) => {
 				)
 			))
 			.catch(e => setErr(e.message))
-	}, [type, amount, difficulty])
+	}, [amount, category, type, difficulty])
 
 	return data
 };
