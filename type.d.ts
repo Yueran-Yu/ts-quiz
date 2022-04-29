@@ -11,36 +11,34 @@ interface QuestionProps extends DataProps {
 	allAnswers: string[]
 }
 
+interface FetchData {
+	data: QuestionProps[]
+	err: string
+}
+
 interface CardProps {
 	questionNum: number
 	totalQuestions: number
 	question: string
 	answers: string[]
-	userAnswer: any
-	callback: () => void
+	userAnswer: AnswerProps | undefined
+	checkAnswers: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-interface QuizProps {
-	questions: QuestionProps[],
-	number: number,
-	userAnswers: AnswerObject[],
-	score: number,
-}
-
-interface AnswerObject {
-	question: string
-	answer: string
-	correct: boolean
-	correctAnswer: string
+interface AnswerProps {
+	question: string,
+	answer: string,
+	isCorrect: boolean,
+	correctAnswer: string,
 }
 
 interface ConditionBoardProps {
 	form: FormProps
-	handleConditionChange: (e: React.ChangeEvent<HTMLSelectElement|HTMLInputElement>) => void
+	handleConditionChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void
 }
 
 interface FormProps {
-	amount?:number
+	amount?: number
 	type?: string
 	difficulty?: string
 	category?: number

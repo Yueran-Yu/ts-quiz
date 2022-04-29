@@ -2,18 +2,8 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import {shuffleArray} from "../utils";
 
-const useFetchData = ({amount, type, difficulty, category}: FormProps) => {
-	const [data, setData] = useState<QuestionProps>(
-		{
-			category: "",
-			correct_answer: " ",
-			difficulty: "",
-			incorrect_answers: [],
-			question: "",
-			type: "",
-			allAnswers: []
-		})
-
+const useFetchData = ({amount, type, difficulty, category}: FormProps):FetchData => {
+	const [data, setData] = useState<QuestionProps[]>([])
 	const [err, setErr] = useState<string>('')
 
 	useEffect(() => {
@@ -37,8 +27,7 @@ const useFetchData = ({amount, type, difficulty, category}: FormProps) => {
 			))
 			.catch(e => setErr(e.message))
 	}, [amount, category, type, difficulty])
-
-	return data
+	return {err, data}
 };
 
 export default useFetchData;

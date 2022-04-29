@@ -15,12 +15,12 @@ export const Difficulties = [
 
 export const Types = [
 	{
-		value: "multiple",
-		name: "Multiple"
-	},
-	{
 		value: "boolean",
 		name: "Boolean"
+	},
+	{
+		value: "multiple",
+		name: "Multiple"
 	}
 ]
 

@@ -19,8 +19,8 @@ const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) 
 					Types.map(t =>
 						<div key={t.value}>
 							<input type="radio"
-										 id={t.value}
 										 name="type"
+										 id={t.value}
 										 value={t.value}
 										 onChange={handleConditionChange}
 										 checked={form.type === t.value}/>
