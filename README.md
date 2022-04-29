@@ -18,4 +18,8 @@
 - We can't pass **isCorrect** property to **QuestionCard**, since we can never read the property =>isCorrect before
   the **userAnswers** object array to be rendered. So it will show this
   error: ```Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')```
+- Property **number**, has two sides, one it should be used as the index of Questions, so it should be started from 0.
+  Another side, it should be displayed on the screen as the first question count, so it should be ***1*** in the screen
+  when the game start.
+
     

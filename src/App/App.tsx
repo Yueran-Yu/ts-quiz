@@ -8,14 +8,15 @@ const App: FC = () => {
 	const [loading, setLoading] = useState(false)
 	const [gameOver, setGameOver] = useState(true)
 	const [score, setScore] = useState<number>(0)
-	const [number, setNumber] = useState<number>(1)
+	const [number, setNumber] = useState<number>(0)
 	const [formData, setFormData] = useState<FormProps>({
 		category: 9,
 		amount: 10,
 		type: 'boolean',
 		difficulty: 'easy'
 	})
-
+	console.log("number")
+	console.log(number)
 	const {err, data} = useFetchData(formData)
 	const [questions, setQuestions] = useState<QuestionProps[]>([])
 	const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
@@ -76,7 +77,7 @@ const App: FC = () => {
 								questions && questions.length ?
 									// We can't pass isCorrect property to QuestionCard, since we can never read the property =>isCorrect before the userAnswers object array to be rendered. So it will show this error: Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')
 									<QuestionCard
-										questionNum={number}
+										questionNum={number + 1}
 										totalQuestions={questions.length}
 										question={questions[number].question}
 										answers={questions[number].allAnswers}

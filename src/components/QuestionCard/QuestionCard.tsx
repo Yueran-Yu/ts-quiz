@@ -4,6 +4,8 @@ import {ButtonWrapper} from './QuestionCard.styles';
 const QuestionCard: FC<CardProps> = ({
 																			 questionNum, totalQuestions, question, answers, userAnswer, checkAnswers
 																		 }) => {
+	console.log("questionNum")
+	console.log(questionNum)
 	return (
 		<div>
 			<p className="number">Question:{questionNum} / {totalQuestions} </p>
