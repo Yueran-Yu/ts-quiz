@@ -4,8 +4,6 @@ import {ButtonWrapper} from './QuestionCard.styles';
 const QuestionCard: FC<CardProps> = ({
 																			 questionNum, totalQuestions, question, answers, userAnswer, checkAnswers
 																		 }) => {
-	console.log("questionNum")
-	console.log(questionNum)
 	return (
 		<div>
 			<p className="number">Question:{questionNum} / {totalQuestions} </p>
@@ -16,6 +14,8 @@ const QuestionCard: FC<CardProps> = ({
 						key={index}
 						disabled={!!userAnswer}
 						value={answer}
+						isCorrect={userAnswer?.correctAnswer === answer}
+						userClicked={userAnswer?.answer === answer}
 						onClick={checkAnswers}>
 						<span dangerouslySetInnerHTML={{__html: answer}}/>
 					</ButtonWrapper>

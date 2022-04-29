@@ -19,7 +19,7 @@ export const MainSection = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   display: flex;
   flex-direction: row;
-  background: whitesmoke;
+  background: white;
   justify-content: space-evenly;
   margin: 20px;
   color: midnightblue;
@@ -28,7 +28,6 @@ export const MainSection = styled.div`
 `
 
 export const QuestionBoard = styled.div`
-  background-color: wheat;
 	padding:20px;
 	margin:20px;
 `

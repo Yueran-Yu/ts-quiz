@@ -15,14 +15,11 @@ const App: FC = () => {
 		type: 'boolean',
 		difficulty: 'easy'
 	})
-	console.log("number")
-	console.log(number)
 	const {err, data} = useFetchData(formData)
 	const [questions, setQuestions] = useState<QuestionProps[]>([])
 	const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
 
-
-	const startTrivia = () => {
+	const startGame = () => {
 		setLoading(true)
 		setGameOver(false)
 		setQuestions(data)
@@ -37,7 +34,7 @@ const App: FC = () => {
 				[...userAnswers, {
 					question: questions[number].question,
 					answer: _answer,
-					isCorrect: isCorrect,
+					isCorrect,
 					correctAnswer: questions[number].correct_answer
 				}]))
 
@@ -67,10 +64,12 @@ const App: FC = () => {
 			<h1>Quick Quiz Game</h1>
 			<MainSection>
 				<QuestionBoard>
-					<button className='start' onClick={startTrivia}>
-						Start
-					</button>
-					<p className="score">Score:{score} </p>
+					{(gameOver || userAnswers.length === formData.amount) &&
+          <button className='start' onClick={startGame}>
+            Start
+          </button>
+					}
+					{!gameOver && <h2 className="score">Score:{score} </h2>}
 					{err ? <h1>Sorry, there is an error...</h1> :
 						gameOver ? <h4>Click Start To Play</h4> :
 							loading ? <h4>Loading Questions...</h4> :
@@ -86,7 +85,17 @@ const App: FC = () => {
 									/> :
 									<h4>Oops! Question Not Exists<br/>Please Select Again</h4>
 					}
-					<button className="next" onClick={nextQuestion}>Next Question</button>
+					{
+						//1. game is not over
+						//2. game is not loading
+						//3. empty answer is not allow
+						//4. the question length is not reach the total amount of questions
+						!gameOver &&
+						!loading &&
+						userAnswers.length === number + 1 &&
+						number + 1 !== formData.amount ?
+							<button className="next" onClick={nextQuestion}>Next Question</button> : ""
+					}
 				</QuestionBoard>
 				<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>
 			</MainSection>
