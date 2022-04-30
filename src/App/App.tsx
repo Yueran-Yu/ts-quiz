@@ -3,21 +3,24 @@ import ConditionBoard from '../components/ConditionBoard/ConditionBoard';
 import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
 import {AppWrapper, MainSection, QuestionBoard} from "./App.styles";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 const App: FC = () => {
-	const [loading, setLoading] = useState(false)
-	const [gameOver, setGameOver] = useState(true)
-	const [score, setScore] = useState<number>(0)
-	const [number, setNumber] = useState<number>(0)
-	const [formData, setFormData] = useState<FormProps>({
+	const initialData = {
 		category: 9,
 		amount: 10,
 		type: 'boolean',
 		difficulty: 'easy'
-	})
+	}
+	const [loading, setLoading] = useState(false)
+	const [gameOver, setGameOver] = useState(true)
+	const [score, setScore] = useState<number>(0)
+	const [number, setNumber] = useState<number>(0)
+	const [formData, setFormData] = useLocalStorage<FormProps>("formData", initialData)
 	const {err, data} = useFetchData(formData)
 	const [questions, setQuestions] = useState<QuestionProps[]>([])
 	const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
+
 
 	const startGame = () => {
 		setLoading(true)
@@ -55,23 +58,23 @@ const App: FC = () => {
 
 	const handleConditionChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
 		const {name, value} = e.target
-		setFormData(formData => ({...formData, [name]: value})
-		)
+		setFormData(formData => ({...formData, [name]: value}))
+		setGameOver(true)
 	}
 
 	return (
 		<AppWrapper>
-			<h1>Quick Quiz Game</h1>
+			<h1>Quick Quiz</h1>
 			<MainSection>
 				<QuestionBoard>
-					{(gameOver || userAnswers.length === formData.amount) &&
+					{(gameOver || userAnswers.length === questions.length) &&
           <button className='start' onClick={startGame}>
             Start
           </button>
 					}
 					{!gameOver && <h2 className="score">Score:{score} </h2>}
 					{err ? <h1>Sorry, there is an error...</h1> :
-						gameOver ? <h4>Click Start To Play</h4> :
+						gameOver ? <h2>Click Start To Play</h2> :
 							loading ? <h4>Loading Questions...</h4> :
 								questions && questions.length ?
 									// We can't pass isCorrect property to QuestionCard, since we can never read the property =>isCorrect before the userAnswers object array to be rendered. So it will show this error: Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')
@@ -93,7 +96,7 @@ const App: FC = () => {
 						!gameOver &&
 						!loading &&
 						userAnswers.length === number + 1 &&
-						number + 1 !== formData.amount ?
+						number + 1 !== questions.length ?
 							<button className="next" onClick={nextQuestion}>Next Question</button> : ""
 					}
 				</QuestionBoard>

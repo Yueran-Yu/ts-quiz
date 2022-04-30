@@ -1,8 +1,12 @@
 import React, {FC} from 'react';
 import {ButtonWrapper} from './QuestionCard.styles';
 
-const QuestionCard: FC<CardProps> = ({
-																			 questionNum, totalQuestions, question, answers, userAnswer, checkAnswers
+const QuestionCard: FC<CardProps> = ({questionNum,
+																			 totalQuestions,
+																			 question,
+																			 answers,
+																			 userAnswer,
+																			 checkAnswers
 																		 }) => {
 	return (
 		<div>

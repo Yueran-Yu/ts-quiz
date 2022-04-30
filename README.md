@@ -22,4 +22,15 @@
   Another side, it should be displayed on the screen as the first question count, so it should be ***1*** in the screen
   when the game start.
 
+Now I need to consider store some data in the browser.
+
+- What should I store?
+    - The condition board should be stored, since if the user refresh the page, the condition will back to the initial
+      state, this is not professional.
+    -
+- Where should I store?
+
+#### Persist the data by encapsulating a custom hook - **useLocalStorage**
+
+
     
