@@ -2,8 +2,6 @@ import React, {FC} from 'react';
 import {Categories, Types, Difficulties, QuestionAmount} from "../../hooks/constraints";
 
 const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) => {
-	console.log("form")
-	console.log(form)
 	return (
 		<form>
 			<label htmlFor="category"> Category: </label>

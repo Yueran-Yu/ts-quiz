@@ -32,5 +32,7 @@ Now I need to consider store some data in the browser.
 
 #### Persist the data by encapsulating a custom hook - **useLocalStorage**
 
+- Implement react-beforeunload to prevent the browser from refreshing.
+
 
     

@@ -4,6 +4,8 @@ import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
 import {AppWrapper, MainSection, QuestionBoard} from "./App.styles";
 import {useLocalStorage} from "../hooks/useLocalStorage";
+import LeaderBoard from "../components/LeaderBoard/LeaderBoard";
+import {useBeforeunload} from "react-beforeunload";
 
 const App: FC = () => {
 	const initialData = {
@@ -62,6 +64,13 @@ const App: FC = () => {
 		setGameOver(true)
 	}
 
+
+	useBeforeunload((e: any) => {
+		if (userAnswers.length !== 0 && userAnswers.length !== number+1) {
+			e.preventDefault()
+		}
+	})
+
 	return (
 		<AppWrapper>
 			<h1>Quick Quiz</h1>
@@ -86,7 +95,7 @@ const App: FC = () => {
 										userAnswer={userAnswers && userAnswers[number]}
 										checkAnswers={checkAnswers}
 									/> :
-									<h4>Oops! Question Not Exists<br/>Please Select Again</h4>
+									<h4>Oops! Question Out of Bound<br/>Please Select Again</h4>
 					}
 					{
 						//1. game is not over
@@ -102,6 +111,7 @@ const App: FC = () => {
 				</QuestionBoard>
 				<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>
 			</MainSection>
+			<LeaderBoard/>
 		</AppWrapper>
 	)
 }
