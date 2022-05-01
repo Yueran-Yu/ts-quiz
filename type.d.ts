@@ -44,3 +44,23 @@ interface FormProps {
 	category?: number
 }
 
+interface subRowProps {
+	index: number
+	Date: Date
+	category: string
+	type: string
+	difficulty: string
+	correctNumber: number
+	totalNumber: number
+}
+
+interface parentRowProps{
+	date: Date
+	highest: number
+	lowest:number
+	average:number
+	played_times:number
+}
+
+
+

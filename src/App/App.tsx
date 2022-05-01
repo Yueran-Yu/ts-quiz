@@ -14,20 +14,23 @@ const App: FC = () => {
 		type: 'boolean',
 		difficulty: 'easy'
 	}
+
+	const [formData, setFormData] = useLocalStorage<FormProps>("formData", initialData)
+	const {err, data} = useFetchData(formData)
 	const [loading, setLoading] = useState(false)
 	const [gameOver, setGameOver] = useState(true)
 	const [score, setScore] = useState<number>(0)
 	const [number, setNumber] = useState<number>(0)
-	const [formData, setFormData] = useLocalStorage<FormProps>("formData", initialData)
-	const {err, data} = useFetchData(formData)
 	const [questions, setQuestions] = useState<QuestionProps[]>([])
 	const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
-
 
 	const startGame = () => {
 		setLoading(true)
 		setGameOver(false)
 		setQuestions(data)
+		setScore(0)
+		setUserAnswers([])
+		setNumber(0)
 		setLoading(false)
 	}
 
@@ -42,21 +45,20 @@ const App: FC = () => {
 					isCorrect,
 					correctAnswer: questions[number].correct_answer
 				}]))
-
 			isCorrect && setScore(score => score + 1)
 		}
 	}
 
 	const nextQuestion = () => {
-		setNumber(num => {
-			if (num === questions.length) {
-				setGameOver(true)
-				return num
-			} else {
-				return num + 1
-			}
-		})
+		const nextQ = number + 1
+		if (nextQ === questions.length) {
+			setGameOver(true);
+		} else {
+			setNumber(nextQ);
+		}
 	}
+
+	console.log(number)
 
 	const handleConditionChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
 		const {name, value} = e.target
@@ -64,9 +66,8 @@ const App: FC = () => {
 		setGameOver(true)
 	}
 
-
 	useBeforeunload((e: any) => {
-		if (userAnswers.length !== 0 && userAnswers.length !== number+1) {
+		if (userAnswers.length !== 0 && userAnswers.length !== number + 1 && gameOver) {
 			e.preventDefault()
 		}
 	})
@@ -81,7 +82,7 @@ const App: FC = () => {
             Start
           </button>
 					}
-					{!gameOver && <h2 className="score">Score:{score} </h2>}
+					{!gameOver && <h2 className="score">Score:{score}</h2>}
 					{err ? <h1>Sorry, there is an error...</h1> :
 						gameOver ? <h2>Click Start To Play</h2> :
 							loading ? <h4>Loading Questions...</h4> :
@@ -95,7 +96,7 @@ const App: FC = () => {
 										userAnswer={userAnswers && userAnswers[number]}
 										checkAnswers={checkAnswers}
 									/> :
-									<h4>Oops! Question Out of Bound<br/>Please Select Again</h4>
+									<h4>Oops! Question Out of Limit<br/>Please Select Again</h4>
 					}
 					{
 						//1. game is not over
@@ -105,8 +106,8 @@ const App: FC = () => {
 						!gameOver &&
 						!loading &&
 						userAnswers.length === number + 1 &&
-						number + 1 !== questions.length ?
-							<button className="next" onClick={nextQuestion}>Next Question</button> : ""
+						number !== questions.length - 1 &&
+            <button className="next" onClick={nextQuestion}>Next Question</button>
 					}
 				</QuestionBoard>
 				<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>

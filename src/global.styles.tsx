@@ -41,8 +41,8 @@ export const GlobalStyle = createGlobalStyle`
       z-index: -1;
       width: 100%;
       height: 100%;
-      filter: blur(12px);
-      -webkit-filter: blur(12px);
+      filter: blur(6px);
+      -webkit-filter: blur(6px);
     }
   }
 `

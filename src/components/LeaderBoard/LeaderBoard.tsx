@@ -1,16 +1,17 @@
 import React from 'react';
+import { CollapsibleTable } from '../Table/CollapsibleTable';
 import {LeaderWrapper} from "./LeaderBoard.styles";
 
 const LeaderBoard = () => {
 	return (
 		<LeaderWrapper>
-			<h3>Leader Board</h3>
-			<h4>How many times played so far</h4>
-			<h4>The Highest Score</h4>
-			<h4>The Lowest Score</h4>
-			<h4>The average Score</h4>
-			<h4>Each time details</h4>
-			<p>Date, Score, Category, Type, Difficulty, total Amount</p>
+			<h2>Leaderboard</h2>
+			<h4>Quiz Record Within 30 Days</h4>
+			<CollapsibleTable/>
+			<div>
+				<h4>Details</h4>
+
+			</div>
 		</LeaderWrapper>
 	);
 };
