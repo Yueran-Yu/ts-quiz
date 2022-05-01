@@ -31,6 +31,7 @@ Now I need to consider store some data in the browser.
 9. Where should I store?
 
 10. #### Persist the data by encapsulating a custom hook - **useLocalStorage**
-11. Implement react-beforeunload to prevent the browser from refreshing. 12Instead of using localstorage to generate an incremented index, IIFE(immediately invoked function expressions) will be a better choice to populate the unique index
+11. Implement react-beforeunload to prevent the browser from refreshing. 
+12. Instead of using localstorage to generate an incremented index, IIFE(immediately invoked function expressions) will be a better choice to populate the unique index
 
     
