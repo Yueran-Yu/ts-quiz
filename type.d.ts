@@ -38,23 +38,23 @@ interface ConditionBoardProps {
 }
 
 interface FormProps {
-	amount?: number
-	type?: string
-	difficulty?: string
-	category?: number
-}
-
-interface subRowProps {
-	index: number
-	Date: Date
-	category: string
+	amount: number
 	type: string
 	difficulty: string
-	correctNumber: number
+	category: number
+}
+
+interface SubRowProps {
+	index: number
+	createdAt: string
+	category: number
+	type: string
+	difficulty: string
+	score: number
 	totalNumber: number
 }
 
-interface parentRowProps{
+interface ParentRowProps{
 	date: Date
 	highest: number
 	lowest:number

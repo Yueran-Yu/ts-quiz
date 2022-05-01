@@ -6,6 +6,7 @@ import {AppWrapper, MainSection, QuestionBoard} from "./App.styles";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import LeaderBoard from "../components/LeaderBoard/LeaderBoard";
 import {useBeforeunload} from "react-beforeunload";
+import {incrementIndex} from "../hooks/incrementIndex";
 
 const App: FC = () => {
 	const initialData = {
@@ -23,7 +24,7 @@ const App: FC = () => {
 	const [number, setNumber] = useState<number>(0)
 	const [questions, setQuestions] = useState<QuestionProps[]>([])
 	const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
-
+	const [rows, setRows] = useLocalStorage<SubRowProps[]>("subRows", [])
 	const startGame = () => {
 		setLoading(true)
 		setGameOver(false)
@@ -47,7 +48,25 @@ const App: FC = () => {
 				}]))
 			isCorrect && setScore(score => score + 1)
 		}
+
+		if (number === questions.length - 1) {
+			console.log("success!!!")
+
+			const obj = {
+				index: incrementIndex(),
+				createdAt: new Date().toLocaleString(),
+				category: formData.category,
+				type: formData.type,
+				difficulty: formData.difficulty,
+				score: score,
+				totalNumber: formData.amount
+			}
+			setRows(rows => [...rows, {...obj}]
+			)
+		}
 	}
+
+	console.log(rows && rows[0])
 
 	const nextQuestion = () => {
 		const nextQ = number + 1
@@ -58,7 +77,6 @@ const App: FC = () => {
 		}
 	}
 
-	console.log(number)
 
 	const handleConditionChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
 		const {name, value} = e.target

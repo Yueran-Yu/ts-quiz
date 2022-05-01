@@ -125,8 +125,8 @@ export const Categories = [
 
 export const QuestionAmount = [
 	{
-		value: "five",
-		name: 5
+		value: "two",
+		name: 2
 	},
 	{
 		value: "ten",
