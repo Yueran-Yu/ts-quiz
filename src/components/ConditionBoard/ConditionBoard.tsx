@@ -6,7 +6,9 @@ const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) 
 		<form>
 			<label htmlFor="category"> Category: </label>
 			<select id="category" name="category" onChange={handleConditionChange} defaultValue={form.category}>
-				{Categories.map(c => <option key={c.value} value={c.value}>{c.name}</option>)}
+				{
+					Object.entries(Categories).map(([key, value]) => <option key={key} value={key}>{value}</option>)
+				}
 			</select>
 			<br/>
 			<label htmlFor="amount"> Question Amount: </label>

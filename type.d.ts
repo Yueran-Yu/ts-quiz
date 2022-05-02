@@ -11,6 +11,9 @@ interface QuestionProps extends DataProps {
 	allAnswers: string[]
 }
 
+interface CategoryProps{
+	[key:number]:string
+}
 interface FetchData {
 	data: QuestionProps[]
 	err: string
@@ -45,7 +48,7 @@ interface FormProps {
 }
 
 interface SubRowProps {
-	index: number
+	id: number
 	createdAt: string
 	category: number
 	type: string
@@ -54,13 +57,17 @@ interface SubRowProps {
 	totalNumber: number
 }
 
-interface ParentRowProps{
+interface ParentRowProps {
 	date: Date
 	highest: number
-	lowest:number
-	average:number
-	played_times:number
+	lowest: number
+	average: number
+	played_times: number
 }
 
+interface RowContextProps {
+	rows: SubRowProps[]
+	setRows: React.Dispatch<React.SetStateAction<SubRowProps[]>>
+}
 
 

@@ -1,5 +1,5 @@
-export const incrementIndex = (function (a: number) {
-	return function () {
+export const incrementIndex = ((a: number) => {
+	return () => {
 		a = Math.round(Date.now() * Math.random());
 		return a
 	}

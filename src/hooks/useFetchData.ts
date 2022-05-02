@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
-import {shuffleArray} from "../utils";
+import {shuffleArray} from "../Helper/shuffleArray";
 
 const useFetchData = ({amount, type, difficulty, category}: FormProps):FetchData => {
 	const [data, setData] = useState<QuestionProps[]>([])

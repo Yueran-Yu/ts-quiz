@@ -12,9 +12,14 @@ import {
 	TableHead,
 	TableBody
 } from "./index";
+import {useRowContext} from "../../context/rowContext";
+import {Capitalize} from "../../Helper/capitalize";
+import {Categories} from "../../hooks/constraints";
 
 const Row = () => {
 	const [open, setOpen] = useState(false)
+	const {rows} = useRowContext()
+
 	return (
 		<>
 			<TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
@@ -38,22 +43,38 @@ const Row = () => {
 								<TableHead>
 									<TableRow>
 										<TableCell>No.</TableCell>
-										<TableCell>Date</TableCell>
+										<TableCell align="center">Date</TableCell>
 										<TableCell align="right">Category</TableCell>
 										<TableCell align="right">Type</TableCell>
 										<TableCell align="right">Difficulty</TableCell>
-										<TableCell align="right">Score (correct/questions)</TableCell>
+										<TableCell align="center">Score (Correct/ Questions)</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									<TableRow key="1">
-										<TableCell component="th" scope="row">1</TableCell>
-										<TableCell>2022-04-30</TableCell>
-										<TableCell align="right">General Knowledge</TableCell>
-										<TableCell align="right">Boolean</TableCell>
-										<TableCell align="right">Easy</TableCell>
-										<TableCell align="right">80% (8/10)</TableCell>
-									</TableRow>
+									{
+										rows.map(({
+																id,
+																createdAt,
+																category,
+																type,
+																difficulty,
+																score,
+																totalNumber
+															}, index) =>
+											<TableRow key="1">
+												<TableCell component="th" scope="row">{index + 1}</TableCell>
+												<TableCell align="center">{createdAt}</TableCell>
+												<TableCell align="right">{Categories[category]}</TableCell>
+												<TableCell align="right">{Capitalize(type)}</TableCell>
+												<TableCell align="right">{Capitalize(difficulty)}</TableCell>
+												<TableCell
+													align="center">{((score / totalNumber) * 100).toPrecision(2)}%
+													({score} / {totalNumber})</TableCell>
+											</TableRow>
+										)
+									}
+
+
 								</TableBody>
 							</Table>
 						</Box>

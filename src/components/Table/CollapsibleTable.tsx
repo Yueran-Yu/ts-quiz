@@ -3,7 +3,6 @@ import {TableContainer, Paper, Table, TableHead, TableBody, TableRow, TableCell}
 import Row from "./Row";
 
 export const CollapsibleTable = () => {
-
 	return (
 		<TableContainer component={Paper}>
 			<Table aria-label="collapsible table">
@@ -18,7 +17,8 @@ export const CollapsibleTable = () => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<Row />
+				<Row/>
+
 				</TableBody>
 			</Table>
 		</TableContainer>
