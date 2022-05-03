@@ -4,7 +4,8 @@ const fontFamily = "'Questrial', sans-serif"
 
 export const GlobalStyle = createGlobalStyle`
   html {
-    height: 100%;
+    min-height: 100%;
+		height:100%;
   }
 
   * {
@@ -20,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
     font-family: ${fontFamily};
     position: relative;
-    height: 100%;
+		min-height: 100%;
     z-index: -2;
 		align-items: center;
 		

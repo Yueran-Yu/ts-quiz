@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {
 	TableRow,
 	TableCell,
@@ -16,10 +16,9 @@ import {useRowContext} from "../../context/rowContext";
 import {Capitalize} from "../../Helper/capitalize";
 import {Categories} from "../../hooks/constraints";
 
-const Row = () => {
+const Row: FC<RowProps> = ({date, frequency, highest, lowest, average}) => {
 	const [open, setOpen] = useState(false)
-	const {rows} = useRowContext()
-
+	const {rows, table} = useRowContext()
 	return (
 		<>
 			<TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
@@ -28,11 +27,11 @@ const Row = () => {
 						{open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
 					</IconButton>
 				</TableCell>
-				<TableCell component="th" scope="row">2022-05-01</TableCell>
-				<TableCell align="right">Times</TableCell>
-				<TableCell align="right">Highest</TableCell>
-				<TableCell align="right">Lowest</TableCell>
-				<TableCell align="right">Average</TableCell>
+				<TableCell component="th" scope="row">{date}</TableCell>
+				<TableCell align="center">{frequency}</TableCell>
+				<TableCell align="center">{highest}%</TableCell>
+				<TableCell align="center">{lowest}%</TableCell>
+				<TableCell align="center">{average}%</TableCell>
 			</TableRow>
 			<TableRow>
 				<TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -44,37 +43,38 @@ const Row = () => {
 									<TableRow>
 										<TableCell>No.</TableCell>
 										<TableCell align="center">Date</TableCell>
-										<TableCell align="right">Category</TableCell>
-										<TableCell align="right">Type</TableCell>
-										<TableCell align="right">Difficulty</TableCell>
+										<TableCell align="center">Category</TableCell>
+										<TableCell align="center">Type</TableCell>
+										<TableCell align="center">Difficulty</TableCell>
 										<TableCell align="center">Score (Correct/ Questions)</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
 									{
-										rows.map(({
-																id,
-																createdAt,
-																category,
-																type,
-																difficulty,
-																score,
-																totalNumber
-															}, index) =>
-											<TableRow key="1">
-												<TableCell component="th" scope="row">{index + 1}</TableCell>
-												<TableCell align="center">{createdAt}</TableCell>
-												<TableCell align="right">{Categories[category]}</TableCell>
-												<TableCell align="right">{Capitalize(type)}</TableCell>
-												<TableCell align="right">{Capitalize(difficulty)}</TableCell>
-												<TableCell
-													align="center">{((score / totalNumber) * 100).toPrecision(2)}%
-													({score} / {totalNumber})</TableCell>
-											</TableRow>
+										Object.entries(table).map(([key, value]) =>
+											key === date &&
+											value.slice(0).reverse().map(({
+																											id,
+																											createdAt,
+																											category,
+																											type,
+																											difficulty,
+																											score,
+																											totalNumber
+																										}, index) =>
+												<TableRow key={id}>
+													<TableCell component="th" scope="row">{index + 1}</TableCell>
+													<TableCell align="center">{createdAt}</TableCell>
+													<TableCell align="center">{Categories[category]}</TableCell>
+													<TableCell align="center">{Capitalize(type)}</TableCell>
+													<TableCell align="center">{Capitalize(difficulty)}</TableCell>
+													<TableCell
+														align="center">{((score / totalNumber) * 100).toFixed(2)}%
+														({score} / {totalNumber})</TableCell>
+												</TableRow>
+											)
 										)
 									}
-
-
 								</TableBody>
 							</Table>
 						</Box>
