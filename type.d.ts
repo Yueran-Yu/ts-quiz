@@ -23,6 +23,7 @@ interface FetchData {
 interface CardProps {
 	questionNum: number
 	totalQuestions: number
+	nextQuestion: () => void
 	question: string
 	answers: string[]
 	userAnswer: AnswerProps | undefined
@@ -58,7 +59,7 @@ interface SubRowProps {
 	totalNumber: number
 }
 
-interface RowProps{
+interface RowProps {
 	date: string
 	frequency: number
 	highest: string
@@ -71,6 +72,16 @@ interface ParentRowProps {
 }
 
 interface RowContextProps {
+	gameOver: boolean
+	setGameOver: React.Dispatch<React.SetStateAction<boolean>>
+	loading: boolean
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>
+	userAnswers: AnswerProps[]
+	setUserAnswers: React.Dispatch<React.SetStateAction<AnswerProps[]>>
+	number: number
+	setNumber: React.Dispatch<React.SetStateAction<number>>
+	questions: QuestionProps[]
+	setQuestions: React.Dispatch<React.SetStateAction<QuestionProps[]>>
 	rows: SubRowProps[]
 	setRows: React.Dispatch<React.SetStateAction<SubRowProps[]>>
 	table: ParentRowProps

@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
+export const btnFont = "'Questrial', sans-serif"
+export const contextFont = "'Roboto', sans-serif"
+
 export const AppWrapper = styled.div`
   color: white;
-  background-color: rgba(76, 89, 154, 0.9);
+  background-color: rgba(76, 89, 154, 0.85);
   margin: 20px;
   padding: 30px 20px;
-	width: 80vw;
+  width: 80vw;
   border-radius: 10px;
-	height: 100%;
+  height: 100%;
   box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
   h1 {
@@ -30,6 +33,38 @@ export const MainSection = styled.div`
 `
 
 export const QuestionBoard = styled.div`
-	padding:20px;
-	margin:20px;
+  padding: 20px;
+  flex-direction: column;
+  display: flex;
+  min-height: 300px;
+  min-width: 400px;
+  text-align: center;
+
+  justify-content: space-evenly;
+  border-radius: 5px;
+
+  h2 {
+    color: rgb(56, 70, 140);
+    font-size: 2rem;
+    font-family: ${contextFont};
+  }
+
+  .start_btn {
+    background-color: #ea8080;
+    font-weight: bolder;
+		font-size: 1.5rem;
+    padding: 10px 20px;
+
+    &:hover {
+      background-color: #d73434;
+    }
+  }
+`
+
+export const CenterContext = styled.div`
+  padding: 20px;
+  margin: 20px;
+
+
+
 `

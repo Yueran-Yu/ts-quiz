@@ -1,6 +1,5 @@
 import {createGlobalStyle} from "styled-components";
 const BGImage = require("./assets/images/77.jpg");
-const fontFamily = "'Questrial', sans-serif"
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -19,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0 20px;
     display: flex;
     justify-content: center;
-    font-family: ${fontFamily};
     position: relative;
 		min-height: 100%;
     z-index: -2;
