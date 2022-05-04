@@ -12,7 +12,8 @@ export const ConditionWrapper = styled.form`
   display: flex;
   flex-direction: column;
   font-family: ${contextFont};
-  @media screen and (max-width: ${windowsSize.small}) {
+
+  @media screen and (max-width: 1000px) {
     width: 100%;
     padding: 10px;
   }

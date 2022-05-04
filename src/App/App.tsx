@@ -146,7 +146,7 @@ const App: FC = () => {
 							p.frequency = v.length
 							setParentRecords([...parentRecords])
 						} else {
-							setParentRecords(prev => [...prev, {...recordObj}])
+							setParentRecords(prev => [{...recordObj}, ...prev])
 						}
 						return ""
 					})
@@ -156,7 +156,6 @@ const App: FC = () => {
 		)
 		// eslint-disable-next-line
 	}, [table])
-
 	return (
 		<AppWrapper>
 			<h1>Quick Quiz</h1>
