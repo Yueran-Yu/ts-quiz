@@ -25,7 +25,7 @@ export const ConditionWrapper = styled.form`
       margin-top: 5px;
       height: 40px;
       padding: 0 20px;
-			font-size: 20px;
+      font-size: 16px;
     }
   }
 
@@ -50,14 +50,25 @@ export const ConditionWrapper = styled.form`
   }
 
   .input_radio {
-
     input {
       margin: 5px 0;
       padding-left: 5px;
+
+      @media screen and (max-width: ${windowsSize.small}) {
+        margin: 16px 0;
+        border: 6px solid #208ac3;
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+      }
     }
 
     label {
       margin: 0 5px;
+      @media screen and (max-width: ${windowsSize.small}) {
+        padding-left: 10px;
+        font-size: 16px;
+      }
     }
   }
 
