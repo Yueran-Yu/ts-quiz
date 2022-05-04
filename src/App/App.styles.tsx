@@ -71,6 +71,8 @@ export const QuestionBoard = styled.div`
 
   @media screen and (max-width: 1000px) {
     width: 100%;
+  }
+		
 
 
     @media screen and (max-width: ${windowsSize.small}) {
@@ -86,8 +88,6 @@ export const QuestionBoard = styled.div`
       color: rgb(56, 70, 140);
       font-size: 2rem;
       font-family: ${contextFont};
-			
-			
     }
 
     h3 {
