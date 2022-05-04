@@ -153,7 +153,6 @@ const App: FC = () => {
 		// eslint-disable-next-line
 	}, [table])
 
-	console.log("rendered")
 	return (
 		<AppWrapper>
 			<h1>Quick Quiz</h1>
@@ -164,7 +163,7 @@ const App: FC = () => {
             Start
           </button>
 					}
-					{!gameOver && <h2 className="score">Score: {score}</h2>}
+					{!gameOver && questions.length > 0 && <h2 className="score">Score: {score}</h2>}
 					{err ? <h2>Sorry, there is an error...</h2> :
 						gameOver ? <h2>Click Start To Play!</h2> :
 							loading ? <h2>Loading Questions...</h2> :

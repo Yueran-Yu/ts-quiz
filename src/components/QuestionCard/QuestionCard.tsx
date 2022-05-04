@@ -35,7 +35,7 @@ const QuestionCard: FC<CardProps> = ({
 					</ButtonWrapper>
 				)}
 			</AnswerWrapper>
-			<p className="question_bottom"></p>
+			<p className="question_bottom"> </p>
 
 			<NextBtn>{
 				//1. game is not over

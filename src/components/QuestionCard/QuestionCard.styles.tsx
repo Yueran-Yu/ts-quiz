@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import {btnFont} from "../../App/App.styles";
+import {windowsSize} from "../../windowSize";
 
 
 export const QuestionContainer = styled.div`
   border: 1px solid #bababa;
   border-radius: 5px;
-  min-height: 50px;
   margin: 10px 0;
   padding: 10px 20px;
-  max-width: 400px;
-
+  min-width: 300px;
+	
   .number, .question_bottom {
     margin: 10px 0 20px 0;
     position: relative;
@@ -40,9 +40,12 @@ export const QuestionContainer = styled.div`
     width: 100%;
     left: 0;
     border-bottom: 1px dashed #bab9b9;
+
+    @media screen and (max-width: ${windowsSize.small}) {
+      padding: 8px 0;
+    }
   }
 `
-
 export const AnswerWrapper = styled.div`
   margin: 10px 0;
   display: flex;
@@ -96,6 +99,12 @@ export const NextBtn = styled.div`
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+
+    @media screen and (max-width: ${windowsSize.small}) {
+      width: 120px;
+      height: 30px;
+			font-size: 12px;
+    }
   }
 
   .next_btn:hover {

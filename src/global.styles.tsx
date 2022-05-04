@@ -1,4 +1,5 @@
 import {createGlobalStyle} from "styled-components";
+import {windowsSize} from "./windowSize";
 
 const BGImage = require("./assets/images/77.jpg");
 
@@ -24,6 +25,10 @@ export const GlobalStyle = createGlobalStyle`
     z-index: -2;
     align-items: center;
 
+    @media screen and (max-width: ${windowsSize.small} ) {
+     
+    }
+
     &:before {
       content: "";
       background-size: initial;
@@ -40,6 +45,10 @@ export const GlobalStyle = createGlobalStyle`
       height: 100%;
       filter: blur(6px);
       -webkit-filter: blur(6px);
+
+      @media screen and (max-width: ${windowsSize.small} ) {
+        display: none;
+      }
     }
   }
 `
