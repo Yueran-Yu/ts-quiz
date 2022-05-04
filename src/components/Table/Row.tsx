@@ -18,7 +18,7 @@ import {Categories} from "../../hooks/constraints";
 
 const Row: FC<RowProps> = ({date, frequency, highest, lowest, average}) => {
 	const [open, setOpen] = useState(false)
-	const {rows, table} = useRowContext()
+	const {table} = useRowContext()
 	return (
 		<>
 			<TableRow sx={{'& > *': {borderBottom: 'unset'}}}>

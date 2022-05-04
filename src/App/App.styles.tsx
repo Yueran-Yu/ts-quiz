@@ -25,23 +25,33 @@ export const MainSection = styled.div`
   display: flex;
   flex-direction: row;
   background: white;
-  justify-content: space-evenly;
+  justify-content: center;
+  column-gap: 50px;
   margin: 20px;
   color: midnightblue;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 5px;
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
 `
 
 export const QuestionBoard = styled.div`
-  padding: 20px;
+  padding: 0 30px;
   flex-direction: column;
   display: flex;
   min-height: 300px;
-  min-width: 400px;
+  min-width: 300px;
+  width: 45%;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-
-  justify-content: space-evenly;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 5px;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
 
   h2 {
     color: rgb(56, 70, 140);
@@ -49,22 +59,26 @@ export const QuestionBoard = styled.div`
     font-family: ${contextFont};
   }
 
+  h3 {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #ae6001;
+    font-family: ${contextFont};
+  }
+
   .start_btn {
     background-color: #ea8080;
     font-weight: bolder;
-		font-size: 1.5rem;
+    font-size: 1.5rem;
+    width: 90%;
     padding: 10px 20px;
+    margin-bottom: 30px;
+    border: none;
+    color: white;
+    border-radius: 5px;
 
     &:hover {
       background-color: #d73434;
     }
   }
-`
-
-export const CenterContext = styled.div`
-  padding: 20px;
-  margin: 20px;
-
-
-
 `

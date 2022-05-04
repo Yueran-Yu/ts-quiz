@@ -71,6 +71,14 @@ interface ParentRowProps {
 	[key: string]: SubRowProps[]
 }
 
+interface RecordsProps{
+	date: string
+	frequency: number
+	highest: string
+	lowest: string
+	average: string
+}
+
 interface RowContextProps {
 	gameOver: boolean
 	setGameOver: React.Dispatch<React.SetStateAction<boolean>>
@@ -86,6 +94,9 @@ interface RowContextProps {
 	setRows: React.Dispatch<React.SetStateAction<SubRowProps[]>>
 	table: ParentRowProps
 	setTable: React.Dispatch<React.SetStateAction<ParentRowProps>>
+	parentRecords: RecordsProps[]
+	setParentRecords:React.Dispatch<React.SetStateAction<RecordsProps[]>>
 }
+
 
 

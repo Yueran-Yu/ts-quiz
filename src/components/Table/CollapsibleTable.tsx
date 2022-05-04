@@ -4,7 +4,8 @@ import Row from "./Row";
 import {useRowContext} from "../../context/rowContext";
 
 export const CollapsibleTable = () => {
-	const {table} = useRowContext()
+	const {parentRecords} = useRowContext()
+
 
 	return (
 		<TableContainer component={Paper}>
@@ -21,16 +22,9 @@ export const CollapsibleTable = () => {
 				</TableHead>
 				<TableBody>
 					{
-						Object.entries(table).map(([k, v]) => {
-							let origin = v.reduce((acc: number[], {score, totalNumber}) => [...acc, (score / totalNumber)], [])
-							const high = (Math.max(...origin) * 100).toFixed(2)
-							const low = (Math.min(...origin) * 100).toFixed(2)
-							const avg = ((v.reduce((acc: number, {
-								score,
-								totalNumber
-							}) => acc + (score / totalNumber), 0) / v.length) * 100).toFixed(2)
-							return <Row key={k} frequency={v.length} date={k} highest={high} lowest={low} average={avg}/>
-						})
+						parentRecords && parentRecords.map(({date, frequency, highest, lowest, average}) =>
+							<Row key={date} frequency={frequency} date={date} highest={highest} lowest={lowest} average={average}/>
+						)
 					}
 				</TableBody>
 			</Table>

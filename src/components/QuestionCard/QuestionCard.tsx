@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {AnswerWrapper, NextBtn, ButtonWrapper, QuestionContainer} from './QuestionCard.styles';
-import {Button} from "../../index";
 import {useRowContext} from "../../context/rowContext";
 
 const QuestionCard: FC<CardProps> = ({
@@ -47,9 +46,9 @@ const QuestionCard: FC<CardProps> = ({
 				!loading &&
 				userAnswers.length === number + 1 &&
 				number !== questions.length &&
-        <Button className="next_btn" onClick={nextQuestion}>
+        <button className="next_btn" onClick={nextQuestion}>
 					{number === questions.length - 1 ? "Play Again" : "Next Question"}
-        </Button>
+        </button>
 			}
 			</NextBtn>
 		</QuestionContainer>

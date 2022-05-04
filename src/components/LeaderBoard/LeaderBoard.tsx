@@ -5,11 +5,11 @@ import {LeaderWrapper} from "./LeaderBoard.styles";
 const LeaderBoard = () => {
 	return (
 		<LeaderWrapper>
-			<h2>Leaderboard</h2>
-			<h4>Quiz Record Within 30 Days</h4>
+			<h1>Leaderboard</h1>
+			<div>Quiz Record Within 10 Days</div>
 			<CollapsibleTable/>
 		</LeaderWrapper>
-	);
-};
+	)
+}
 
 export default LeaderBoard;

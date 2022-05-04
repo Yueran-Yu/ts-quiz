@@ -30,7 +30,7 @@ export const QuestionContainer = styled.div`
     margin: 15px 0;
     font-size: 1.2rem;
     padding: 10px 0;
-		font-weight: 700;
+    font-weight: 700;
   }
 
   .question_bottom:after {
@@ -56,20 +56,19 @@ type Props = {
 }
 
 export const ButtonWrapper = styled.button<Props>`
-  line-height: 10px;
-  padding: 8px 0;
-  color: #3737c8;
+  padding: 10px 0;
+  border: none;
+  color: #081648;
   border-radius: 5px;
   background: ${({
                    isCorrect,
                    userClicked
                  }) =>
-          isCorrect ? "linear-gradient(90deg, #56FFA4, #59BC86)" :
+          isCorrect ? "linear-gradient(90deg, #7be3d5, #37a192)" :
                   !isCorrect && userClicked ?
-                          "linear-gradient(90deg, #fca9a9, #ff6666)" :
-                          "linear-gradient(90deg, #56ccff, #6eafb4)"};
+                          "linear-gradient(90deg, #fca9a9, #f04848)" :
+                          "linear-gradient(90deg, #b5c1ff, #8294f5)"};
 `
-
 
 export const NextBtn = styled.div`
   margin-top: 45px;
@@ -92,7 +91,7 @@ export const NextBtn = styled.div`
     border: 0;
     font-weight: 700;
     box-shadow: 0 0 14px -7px #f09819;
-    background-image: linear-gradient(45deg, #6dc4bb 0%, #1f8f82 50%, #186960 100%);
+    background-image: linear-gradient(45deg, #6f81e0 0%, #5868b3 50%, #282f53 100%);
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;

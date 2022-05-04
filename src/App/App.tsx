@@ -2,13 +2,12 @@ import React, {ChangeEvent, FC, MouseEvent, useEffect, useState} from 'react';
 import ConditionBoard from '../components/ConditionBoard/ConditionBoard';
 import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
-import {AppWrapper, CenterContext, MainSection, QuestionBoard} from "./App.styles";
+import {AppWrapper, MainSection, QuestionBoard} from "./App.styles";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import LeaderBoard from "../components/LeaderBoard/LeaderBoard";
 import {useBeforeunload} from "react-beforeunload";
 import {incrementIndex} from "../hooks/incrementIndex";
 import {useRowContext} from "../context/rowContext";
-import {Button} from "../index";
 
 const App: FC = () => {
 	const initialData = {
@@ -32,8 +31,10 @@ const App: FC = () => {
 		questions,
 		setQuestions,
 		rows,
+		table,
 		setRows,
-		setTable
+		setTable,
+		setParentRecords
 	} = useRowContext()
 
 	const startGame = () => {
@@ -79,6 +80,7 @@ const App: FC = () => {
 		}
 	})
 
+
 	useEffect(() => {
 		if (questions.length > 0 && number === questions.length) {
 			const obj = {
@@ -90,26 +92,74 @@ const App: FC = () => {
 				score: score,
 				totalNumber: formData.amount
 			}
+
 			setRows(rows => [...rows, {...obj}])
+
 			const key = new Date().toLocaleDateString()
-			setTable(table => ({...table, [key]: [...rows.filter(r => r.createdAt.includes(key)), obj]}))
+			setTable(table => {
+					let result = {} as ParentRowProps
+					let keysLength = Object.keys(table).length
+
+					if (keysLength > 10) {
+						while (Object.keys(table).length > 10) {
+							let temp = Object.keys(table).shift() as string
+							delete table[temp]
+							result = {...table, [key]: [...rows.filter(r => r.createdAt.includes(key)), obj]}
+						}
+					} else {
+						result = {...table, [key]: [...rows.filter(r => r.createdAt.includes(key)), obj]}
+					}
+					return result
+				}
+			)
 		}
 	}, [number])
 
+
+	useEffect(() => {
+		table && Object.entries(table).map(([k, v]) => {
+				let origin = v.reduce((acc: number[], {score, totalNumber}) => [...acc, (score / totalNumber)], [])
+				const high = (Math.max(...origin) * 100).toFixed(2)
+				const low = (Math.min(...origin) * 100).toFixed(2)
+				const avg = ((v.reduce((acc: number, {
+					score,
+					totalNumber
+				}) => acc + (score / totalNumber), 0) / v.length) * 100).toFixed(2)
+
+				const recordObj = {
+					date: k,
+					frequency: v.length,
+					highest: high,
+					lowest: low,
+					average: avg
+				}
+
+				setParentRecords(prev => {
+					return prev.length === 0 ?
+						[{...recordObj}] :
+						prev.map(p => p.date === k ? {...p, ...recordObj} : p
+						)
+				})
+				return ""
+			}
+		)
+	}, [table, setParentRecords])
+
+	console.log("rendered")
 	return (
 		<AppWrapper>
 			<h1>Quick Quiz</h1>
 			<MainSection>
 				<QuestionBoard>
 					{(gameOver && userAnswers.length <= questions.length) &&
-          <Button variant="contained" color="primary" className="start_btn" onClick={startGame}>
+          <button className="start_btn" onClick={startGame}>
             Start
-          </Button>
+          </button>
 					}
 					{!gameOver && <h2 className="score">Score: {score}</h2>}
-					{err ? <h1>Sorry, there is an error...</h1> :
+					{err ? <h2>Sorry, there is an error...</h2> :
 						gameOver ? <h2>Click Start To Play!</h2> :
-							loading ? <h4>Loading Questions...</h4> :
+							loading ? <h2>Loading Questions...</h2> :
 								questions && questions.length ?
 									// We can't pass isCorrect property to QuestionCard, since we can never read the property =>isCorrect before the userAnswers object array to be rendered. So it will show this error: Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')
 									<QuestionCard
@@ -121,7 +171,7 @@ const App: FC = () => {
 										userAnswer={userAnswers && userAnswers[number]}
 										checkAnswers={checkAnswers}
 									/> :
-									<h4>Oops! Question Out of Limit<br/>Please Select Again</h4>
+									<h3>Oops! Question Out of Limit<br/>Please Select Again</h3>
 					}
 				</QuestionBoard>
 				<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>

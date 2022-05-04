@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
 import {Categories, Types, Difficulties, QuestionAmount} from "../../hooks/constraints";
+import { ConditionWrapper } from './Condition.styles';
 
 const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) => {
 	return (
-		<form>
+		<ConditionWrapper>
 			<label htmlFor="category"> Category: </label>
 			<select id="category" name="category" onChange={handleConditionChange} defaultValue={form.category}>
 				{
@@ -19,7 +20,7 @@ const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) 
 				<legend>Type</legend>
 				{
 					Types.map(t =>
-						<div key={t.value}>
+						<div className="input_radio" key={t.value}>
 							<input type="radio"
 										 name="type"
 										 id={t.value}
@@ -34,7 +35,7 @@ const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) 
 			<fieldset>
 				<legend>Difficulty</legend>
 				{
-					Difficulties.map(d => <div key={d.value}>
+					Difficulties.map(d => <div className="input_radio" key={d.value}>
 							<input type="radio"
 										 name="difficulty"
 										 id={d.value}
@@ -46,7 +47,7 @@ const ConditionBoard: FC<ConditionBoardProps> = ({form, handleConditionChange}) 
 					)
 				}
 			</fieldset>
-		</form>
+		</ConditionWrapper>
 	)
 }
 

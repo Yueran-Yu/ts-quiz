@@ -1,10 +1,11 @@
 import {createGlobalStyle} from "styled-components";
+
 const BGImage = require("./assets/images/77.jpg");
 
 export const GlobalStyle = createGlobalStyle`
   html {
     min-height: 100%;
-		height:100%;
+    height: 100%;
   }
 
   * {
@@ -19,22 +20,19 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
     position: relative;
-		min-height: 100%;
+    min-height: 100%;
     z-index: -2;
-		align-items: center;
-		
+    align-items: center;
+
     &:before {
       content: "";
-      background-size: cover;
-      -ms-background-size: cover;
-      -o-background-size: cover;
-      -moz-background-size: cover;
-      -webkit-background-size: cover;
+      background-size: initial;
+      -o-background-size: initial;
+      -moz-background-size: initial;
+      -webkit-background-size: initial;
       position: absolute;
       background-image: url(${BGImage});
-      display: block;
-      background-repeat: no-repeat;
-      background-position: center;
+      background-repeat: repeat;
       left: 0;
       top: 0;
       z-index: -1;
