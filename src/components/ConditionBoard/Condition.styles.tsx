@@ -20,7 +20,6 @@ export const ConditionWrapper = styled.form`
   #category, #amount {
     margin: 10px 0;
     padding: 5px 0;
-    background-color: orange;
 
     @media screen and (max-width: ${windowsSize.small}) {
       margin-top: 5px;
