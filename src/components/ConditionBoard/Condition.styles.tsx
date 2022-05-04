@@ -25,6 +25,7 @@ export const ConditionWrapper = styled.form`
       margin-top: 5px;
       height: 40px;
       padding: 0 20px;
+			font-size: 20px;
     }
   }
 
