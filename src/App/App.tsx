@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, MouseEvent, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, MouseEvent, useEffect, useState} from 'react';
 import ConditionBoard from '../components/ConditionBoard/ConditionBoard';
 import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
@@ -34,6 +34,7 @@ const App: FC = () => {
 		table,
 		setRows,
 		setTable,
+		parentRecords,
 		setParentRecords
 	} = useRowContext()
 
@@ -82,19 +83,17 @@ const App: FC = () => {
 		}
 	})
 
-
-	const updateSubRows = useCallback(() => {
-		const obj = {
-			id: incrementIndex(),
-			createdAt: new Date().toLocaleString(),
-			category: formData.category,
-			type: formData.type,
-			difficulty: formData.difficulty,
-			score: score,
-			totalNumber: formData.amount
-		}
-
+	useEffect(() => {
 		if (questions.length > 0 && number === questions.length) {
+			const obj = {
+				id: incrementIndex(),
+				createdAt: new Date().toLocaleString(),
+				category: formData.category,
+				type: formData.type,
+				difficulty: formData.difficulty,
+				score: score,
+				totalNumber: formData.amount
+			}
 			setRows(rows => [...rows, {...obj}])
 			const key = new Date().toLocaleDateString()
 			setTable(table => {
@@ -119,11 +118,6 @@ const App: FC = () => {
 
 
 	useEffect(() => {
-		updateSubRows()
-	}, [updateSubRows])
-
-
-	useEffect(() => {
 		table && Object.entries(table).map(([k, v]) => {
 				let origin = v.reduce((acc: number[], {score, totalNumber}) => [...acc, (score / totalNumber)], [])
 				const high = (Math.max(...origin) * 100).toFixed(2)
@@ -141,12 +135,22 @@ const App: FC = () => {
 					average: avg
 				}
 
-				setParentRecords(prev => {
-					return prev.length === 0 ?
-						[{...recordObj}] :
-						prev.map(p => p.date === k ? {...p, ...recordObj} : p
-						)
-				})
+				if (parentRecords.length === 0) {
+					setParentRecords([{...recordObj}])
+				} else {
+					parentRecords.find(p => {
+						if (p.date === k) {
+							p.average = avg
+							p.highest = high
+							p.lowest = low
+							p.frequency = v.length
+							setParentRecords([...parentRecords])
+						} else {
+							setParentRecords(prev => [...prev, {...recordObj}])
+						}
+						return ""
+					})
+				}
 				return ""
 			}
 		)

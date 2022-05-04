@@ -71,7 +71,7 @@ interface ParentRowProps {
 	[key: string]: SubRowProps[]
 }
 
-interface RecordsProps{
+interface RecordsProps {
 	date: string
 	frequency: number
 	highest: string
@@ -95,7 +95,7 @@ interface RowContextProps {
 	table: ParentRowProps
 	setTable: React.Dispatch<React.SetStateAction<ParentRowProps>>
 	parentRecords: RecordsProps[]
-	setParentRecords:React.Dispatch<React.SetStateAction<RecordsProps[]>>
+	setParentRecords: React.Dispatch<React.SetStateAction<RecordsProps[]>>
 }
 
 
