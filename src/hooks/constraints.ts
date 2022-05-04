@@ -54,8 +54,8 @@ export const Categories: CategoryProps = {
 
 export const QuestionAmount = [
 	{
-		value: "two",
-		name: 2
+		value: "five",
+		name: 5
 	},
 	{
 		value: "ten",
