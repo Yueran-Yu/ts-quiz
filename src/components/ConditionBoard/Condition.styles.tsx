@@ -20,8 +20,12 @@ export const ConditionWrapper = styled.form`
   #category, #amount {
     margin: 10px 0;
     padding: 5px 0;
+    background-color: orange;
+
     @media screen and (max-width: ${windowsSize.small}) {
       margin-top: 5px;
+      height: 40px;
+      padding: 0 20px;
     }
   }
 
@@ -46,6 +50,7 @@ export const ConditionWrapper = styled.form`
   }
 
   .input_radio {
+
     input {
       margin: 5px 0;
       padding-left: 5px;
