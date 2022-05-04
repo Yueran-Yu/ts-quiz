@@ -72,44 +72,46 @@ export const QuestionBoard = styled.div`
   @media screen and (max-width: 1000px) {
     width: 100%;
   }
-		
 
+  @media screen and (max-width: ${windowsSize.small}) {
+    width: 100%;
+    padding: 0 20px;
+
+    .score {
+      font-size: 1.2rem;
+    }
+  }
+
+  h2 {
+    color: rgb(56, 70, 140);
+    font-size: 2rem;
+    font-family: ${contextFont};
+  }
+
+  h3 {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #ae6001;
+    font-family: ${contextFont};
 
     @media screen and (max-width: ${windowsSize.small}) {
-      width: 100%;
-      padding: 0 20px;
-
-      .score {
-        font-size: 1.2rem;
-      }
+      font-size: 16px;
     }
+  }
 
-    h2 {
-      color: rgb(56, 70, 140);
-      font-size: 2rem;
-      font-family: ${contextFont};
+  .start_btn {
+    background-color: #ea8080;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    width: 90%;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #d73434;
     }
-
-    h3 {
-      margin-top: 20px;
-      font-size: 25px;
-      color: #ae6001;
-      font-family: ${contextFont};
-    }
-
-    .start_btn {
-      background-color: #ea8080;
-      font-weight: bolder;
-      font-size: 1.5rem;
-      width: 90%;
-      padding: 10px 20px;
-      margin-bottom: 30px;
-      border: none;
-      color: white;
-      border-radius: 5px;
-
-      &:hover {
-        background-color: #d73434;
-      }
-    }
+  }
 `
