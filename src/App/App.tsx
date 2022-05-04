@@ -166,7 +166,7 @@ const App: FC = () => {
             Start
           </button>
 					}
-					{!gameOver && questions.length > 0 && <h2 className="score">Score: {score}</h2>}
+					{!gameOver && questions.length > 0 && <h2 className="score">Score: <span>{score}</span></h2>}
 					{err ? <h2>Sorry, there is an error...</h2> :
 						gameOver ? <h2>Click Start To Play!</h2> :
 							loading ? <h2>Loading Questions...</h2> :

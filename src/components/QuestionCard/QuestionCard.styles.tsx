@@ -9,6 +9,14 @@ export const QuestionContainer = styled.div`
   margin: 10px 0;
   padding: 10px 20px;
   min-width: 300px;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: ${windowsSize.small}) {
+    min-width: 300px;
+  }
 	
   .number, .question_bottom {
     margin: 10px 0 20px 0;

@@ -38,11 +38,10 @@ export const MainSection = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  column-gap: 50px;
+  justify-content: space-evenly;
   margin: 20px;
   color: midnightblue;
-  padding: 30px;
+  padding: 30px 0;
   border-radius: 5px;
   background-color: white;
 
@@ -57,7 +56,7 @@ export const MainSection = styled.div`
 `
 
 export const QuestionBoard = styled.div`
-  padding: 0 30px;
+  padding: 10px 30px 0 30px;
   flex-direction: column;
   display: flex;
   min-height: 300px;
@@ -69,6 +68,15 @@ export const QuestionBoard = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 5px;
 
+	.score{
+    font-size: 1.6rem;
+		color: purple;
+		span{
+      font-size: 1.8rem;
+      color:green;
+			font-weight: bolder;
+		}
+  }
   @media screen and (max-width: 1000px) {
     width: 100%;
   }
