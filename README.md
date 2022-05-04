@@ -32,5 +32,5 @@ Now I need to consider store some data in the browser.
 10. #### Persist the data by encapsulating a custom hook - **useLocalStorage**
 11. Implement react-beforeunload to prevent the browser from refreshing. 
 12. Instead of using localstorage to generate an incremented index, IIFE(immediately invoked function expressions) will be a better choice to populate the unique index
-
+13. think about how to solve infinite loop problem with useEffect and useState
     

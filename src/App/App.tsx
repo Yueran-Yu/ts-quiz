@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, MouseEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, MouseEvent, useCallback, useEffect, useState} from 'react';
 import ConditionBoard from '../components/ConditionBoard/ConditionBoard';
 import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
@@ -60,6 +60,8 @@ const App: FC = () => {
 				}]))
 			isCorrect && setScore(score => score + 1)
 		}
+
+
 	}
 
 	const nextQuestion = () => {
@@ -81,20 +83,19 @@ const App: FC = () => {
 	})
 
 
-	useEffect(() => {
+	const updateSubRows = useCallback(() => {
+		const obj = {
+			id: incrementIndex(),
+			createdAt: new Date().toLocaleString(),
+			category: formData.category,
+			type: formData.type,
+			difficulty: formData.difficulty,
+			score: score,
+			totalNumber: formData.amount
+		}
+
 		if (questions.length > 0 && number === questions.length) {
-			const obj = {
-				id: incrementIndex(),
-				createdAt: new Date().toLocaleString(),
-				category: formData.category,
-				type: formData.type,
-				difficulty: formData.difficulty,
-				score: score,
-				totalNumber: formData.amount
-			}
-
 			setRows(rows => [...rows, {...obj}])
-
 			const key = new Date().toLocaleDateString()
 			setTable(table => {
 					let result = {} as ParentRowProps
@@ -113,7 +114,13 @@ const App: FC = () => {
 				}
 			)
 		}
+		// eslint-disable-next-line
 	}, [number])
+
+
+	useEffect(() => {
+		updateSubRows()
+	}, [updateSubRows])
 
 
 	useEffect(() => {
@@ -143,7 +150,8 @@ const App: FC = () => {
 				return ""
 			}
 		)
-	}, [table, setParentRecords])
+		// eslint-disable-next-line
+	}, [table])
 
 	console.log("rendered")
 	return (
