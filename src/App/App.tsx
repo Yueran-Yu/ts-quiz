@@ -2,12 +2,14 @@ import React, {ChangeEvent, FC, MouseEvent, useEffect, useState} from 'react';
 import ConditionBoard from '../components/ConditionBoard/ConditionBoard';
 import QuestionCard from '../components/QuestionCard/QuestionCard';
 import useFetchData from "../hooks/useFetchData";
-import {AppWrapper, MainSection, QuestionBoard} from "./App.styles";
+import {AppWrapper, CircleStyle, MainSection, QuestionBoard} from "./App.styles";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import LeaderBoard from "../components/LeaderBoard/LeaderBoard";
 import {useBeforeunload} from "react-beforeunload";
 import {incrementIndex} from "../hooks/incrementIndex";
 import {useRowContext} from "../context/rowContext";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const App: FC = () => {
 	const initialData = {
@@ -34,7 +36,6 @@ const App: FC = () => {
 		table,
 		setRows,
 		setTable,
-		parentRecords,
 		setParentRecords
 	} = useRowContext()
 
@@ -61,8 +62,6 @@ const App: FC = () => {
 				}]))
 			isCorrect && setScore(score => score + 1)
 		}
-
-
 	}
 
 	const nextQuestion = () => {
@@ -152,40 +151,47 @@ const App: FC = () => {
 		)
 		// eslint-disable-next-line
 	}, [table])
-	console.log("parentRecords")
-	console.log(parentRecords)
+	console.log("loading")
+	console.log(loading)
 	return (
-		<AppWrapper>
-			<h1>Quick Quiz</h1>
-			<MainSection>
-				<QuestionBoard>
-					{(gameOver && userAnswers.length <= questions.length) &&
-          <button className="start_btn" onClick={startGame}>
-            Start
-          </button>
-					}
-					{!gameOver && questions.length > 0 && <h2 className="score">Score: <span>{score}</span></h2>}
-					{err ? <h2>Sorry, there is an error...</h2> :
-						gameOver ? <h2>Click Start To Play!</h2> :
-							loading ? <h2>Loading Questions...</h2> :
-								questions && questions.length ?
-									// We can't pass isCorrect property to QuestionCard, since we can never read the property =>isCorrect before the userAnswers object array to be rendered. So it will show this error: Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')
-									<QuestionCard
-										questionNum={number + 1}
-										nextQuestion={nextQuestion}
-										totalQuestions={questions.length}
-										question={questions[number].question}
-										answers={questions[number].allAnswers}
-										userAnswer={userAnswers && userAnswers[number]}
-										checkAnswers={checkAnswers}
-									/> :
-									<h3>Oops! Question Out of Limit<br/>Please Select Again</h3>
-					}
-				</QuestionBoard>
-				<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>
-			</MainSection>
-			<LeaderBoard/>
-		</AppWrapper>
+		<>
+			{
+				loading ? <CircularProgress style={CircleStyle}/> :
+					<AppWrapper>
+						<h1>Quick Quiz</h1>
+						<MainSection>
+							<QuestionBoard>
+								{(gameOver && userAnswers.length <= questions.length) &&
+                <button className="start_btn" onClick={startGame}>
+                  Start
+                </button>
+								}
+								{!gameOver && questions.length > 0 && <h2 className="score">Score: <span>{score}</span></h2>}
+								{err ? <h2>Sorry, there is an error...</h2> :
+									gameOver ? <h2>Click Start To Play!</h2> :
+										loading ? <h2>Loading Questions...</h2> :
+											questions && questions.length ?
+												// We can't pass isCorrect property to QuestionCard, since we can never read the property =>isCorrect before the userAnswers object array to be rendered. So it will show this error: Uncaught error: TypeError: Cannot read properties of undefined (reading 'isCorrect')
+												<QuestionCard
+													questionNum={number + 1}
+													nextQuestion={nextQuestion}
+													totalQuestions={questions.length}
+													question={questions[number].question}
+													answers={questions[number].allAnswers}
+													userAnswer={userAnswers && userAnswers[number]}
+													checkAnswers={checkAnswers}
+												/> :
+												<h3>Oops! Question Out of Limit<br/>Please Select Again</h3>
+								}
+							</QuestionBoard>
+							<ConditionBoard form={formData} handleConditionChange={handleConditionChange}/>
+						</MainSection>
+						<LeaderBoard/>
+					</AppWrapper>
+			}
+		</>
+
+
 	)
 }
 

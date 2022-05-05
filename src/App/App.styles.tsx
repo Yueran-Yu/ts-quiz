@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {windowsSize} from "../windowSize";
+import React from "react";
 
 export const btnFont = "'Questrial', sans-serif"
 export const contextFont = "'Roboto', sans-serif"
@@ -127,3 +128,15 @@ export const QuestionBoard = styled.div`
     }
   }
 `
+
+export const CircleStyle = {
+	height: "10vw",
+	width: "10vw",
+	position: "absolute",
+	margin: "auto",
+	left: "0",
+	right: "0",
+	top: "0",
+	bottom: "0",
+	textAlign: "center"
+} as React.CSSProperties;

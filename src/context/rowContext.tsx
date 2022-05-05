@@ -5,7 +5,7 @@ const RowContext = createContext<RowContextProps | null>(null)
 export const RowsProvider: FC<ReactNode> = ({children}) => {
 		const [rows, setRows] = useLocalStorage<SubRowProps[]>("subRows", [])
 		const [table, setTable] = useLocalStorage<ParentRowProps>("parentRow", {})
-		const [loading, setLoading] = useState(false)
+		const [loading, setLoading] = useState(true)
 		const [gameOver, setGameOver] = useState(true)
 		const [number, setNumber] = useState<number>(0)
 		const [userAnswers, setUserAnswers] = useState<AnswerProps[]>([])
