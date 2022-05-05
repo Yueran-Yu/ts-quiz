@@ -19,6 +19,7 @@ export const LeaderWrapper = styled.div`
     font-size: 3rem;
     margin: 20px 0;
     font-family: ${contextFont};
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
 
     @media screen and (max-width: ${windowsSize.small} ) {
       font-size: 2rem;

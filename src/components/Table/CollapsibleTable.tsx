@@ -5,8 +5,6 @@ import {useRowContext} from "../../context/rowContext";
 
 export const CollapsibleTable = () => {
 	const {parentRecords} = useRowContext()
-
-
 	return (
 		<TableContainer component={Paper}>
 			<Table aria-label="collapsible table">
@@ -23,7 +21,8 @@ export const CollapsibleTable = () => {
 				<TableBody>
 					{
 						parentRecords && parentRecords.map(({date, frequency, highest, lowest, average}, index) =>
-							<Row key={index} frequency={frequency} date={date} highest={highest} lowest={lowest} average={average}/>
+							<Row key={index} frequency={frequency} date={date} highest={highest} lowest={lowest}
+									 average={average}/>
 						)
 					}
 				</TableBody>

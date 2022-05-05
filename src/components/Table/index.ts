@@ -11,3 +11,5 @@ export {default as Typography} from '@mui/material/Typography';
 export {default as Paper} from '@mui/material/Paper';
 export {default as KeyboardArrowDownIcon} from '@mui/icons-material/KeyboardArrowDown';
 export {default as KeyboardArrowUpIcon} from '@mui/icons-material/KeyboardArrowUp';
+export {default as TablePagination} from '@mui/material/TablePagination';
+

@@ -25,6 +25,8 @@ export const AppWrapper = styled.div`
     font-size: 55px;
     text-align: center;
     font-weight: 900;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+      0px -5px 35px rgba(255,255,255,0.5);
 
     @media screen and (max-width: ${windowsSize.small} ) {
       font-size: 35px;
@@ -68,15 +70,17 @@ export const QuestionBoard = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 5px;
 
-	.score{
+  .score {
     font-size: 1.6rem;
-		color: purple;
-		span{
+    color: purple;
+
+    span {
       font-size: 1.8rem;
-      color:green;
-			font-weight: bolder;
-		}
+      color: green;
+      font-weight: bolder;
+    }
   }
+
   @media screen and (max-width: 1000px) {
     width: 100%;
   }

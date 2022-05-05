@@ -34,6 +34,7 @@ const App: FC = () => {
 		table,
 		setRows,
 		setTable,
+		parentRecords,
 		setParentRecords
 	} = useRowContext()
 
@@ -136,8 +137,6 @@ const App: FC = () => {
 					}
 
 					let res = prev.find(p => p.date === k)
-					console.log("res")
-					console.log(res)
 					if (res) {
 						res.average = avg
 						res.frequency = v.length
@@ -153,6 +152,8 @@ const App: FC = () => {
 		)
 		// eslint-disable-next-line
 	}, [table])
+	console.log("parentRecords")
+	console.log(parentRecords)
 	return (
 		<AppWrapper>
 			<h1>Quick Quiz</h1>
