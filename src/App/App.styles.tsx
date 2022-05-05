@@ -26,8 +26,8 @@ export const AppWrapper = styled.div`
     font-size: 55px;
     text-align: center;
     font-weight: 900;
-    text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-      0px -5px 35px rgba(255,255,255,0.5);
+    text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+      0px -5px 35px rgba(255, 255, 255, 0.5);
 
     @media screen and (max-width: ${windowsSize.small} ) {
       font-size: 35px;
@@ -51,9 +51,12 @@ export const MainSection = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     margin: 20px 0 0 0;
-    border-radius: 0;
+    border-radius: 5px;
     padding: 20px;
     row-gap: 20px;
+  }
+  @media screen and (max-width: ${windowsSize.small}) {
+    border-radius: 0;
 
   }
 `
@@ -73,11 +76,17 @@ export const QuestionBoard = styled.div`
 
   .score {
     font-size: 1.6rem;
-    color: purple;
+    line-height: inherit;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(135deg, white, #e1fa90, #7187f5);
+    width: 100%;
+    padding: 3px 0;
+    border-radius: 20px 20px;
 
     span {
-      font-size: 1.8rem;
-      color: green;
+      font-size: 1.6rem;
+      color: orangered;
       font-weight: bolder;
     }
   }

@@ -39,6 +39,7 @@ export const QuestionContainer = styled.div`
     font-size: 1.2rem;
     padding: 10px 0;
     font-weight: 700;
+    word-wrap:break-word;
   }
 
   .question_bottom:after {
