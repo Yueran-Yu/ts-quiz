@@ -34,7 +34,6 @@ const App: FC = () => {
 		table,
 		setRows,
 		setTable,
-		parentRecords,
 		setParentRecords
 	} = useRowContext()
 
@@ -127,30 +126,28 @@ const App: FC = () => {
 					totalNumber
 				}) => acc + (score / totalNumber), 0) / v.length) * 100).toFixed(2)
 
-				const recordObj = {
-					date: k,
-					frequency: v.length,
-					highest: high,
-					lowest: low,
-					average: avg
-				}
+				setParentRecords(prev => {
+					const recordObj = {
+						date: k,
+						frequency: v.length,
+						highest: high,
+						lowest: low,
+						average: avg
+					}
 
-				if (parentRecords.length === 0) {
-					setParentRecords([{...recordObj}])
-				} else {
-					parentRecords.find(p => {
-						if (p.date === k) {
-							p.average = avg
-							p.highest = high
-							p.lowest = low
-							p.frequency = v.length
-							setParentRecords([...parentRecords])
-						} else {
-							setParentRecords(prev => [{...recordObj}, ...prev])
-						}
-						return ""
-					})
-				}
+					let res = prev.find(p => p.date === k)
+					console.log("res")
+					console.log(res)
+					if (res) {
+						res.average = avg
+						res.frequency = v.length
+						res.highest = high
+						res.lowest = low
+						return [...prev]
+					} else {
+						return [recordObj, ...prev]
+					}
+				})
 				return ""
 			}
 		)

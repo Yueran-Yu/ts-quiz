@@ -22,8 +22,8 @@ export const CollapsibleTable = () => {
 				</TableHead>
 				<TableBody>
 					{
-						parentRecords && parentRecords.map(({date, frequency, highest, lowest, average}) =>
-							<Row key={date} frequency={frequency} date={date} highest={highest} lowest={lowest} average={average}/>
+						parentRecords && parentRecords.map(({date, frequency, highest, lowest, average}, index) =>
+							<Row key={index} frequency={frequency} date={date} highest={highest} lowest={lowest} average={average}/>
 						)
 					}
 				</TableBody>
