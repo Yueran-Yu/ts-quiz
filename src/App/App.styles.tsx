@@ -57,7 +57,6 @@ export const MainSection = styled.div`
   }
   @media screen and (max-width: ${windowsSize.small}) {
     border-radius: 0;
-
   }
 `
 
@@ -76,13 +75,14 @@ export const QuestionBoard = styled.div`
 
   .score {
     font-size: 1.6rem;
-    line-height: inherit;
     display: flex;
     justify-content: center;
+		align-items: center;
     background-image: linear-gradient(135deg, white, #e1fa90, #7187f5);
     width: 100%;
     padding: 3px 0;
     border-radius: 20px 20px;
+		
 
     span {
       font-size: 1.6rem;
