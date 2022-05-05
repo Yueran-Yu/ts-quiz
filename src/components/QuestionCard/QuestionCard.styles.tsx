@@ -8,7 +8,7 @@ export const QuestionContainer = styled.div`
   border-radius: 5px;
   margin: 10px 0;
   padding: 10px 20px;
-  min-width: 300px;
+  min-width: 00px;
 
   @media screen and (max-width: 1000px) {
     width: 100%;

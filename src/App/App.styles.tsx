@@ -79,9 +79,18 @@ export const QuestionBoard = styled.div`
     justify-content: center;
 		align-items: center;
     background-image: linear-gradient(135deg, white, #e1fa90, #7187f5);
-    width: 100%;
     padding: 3px 0;
+		width: 100%;
     border-radius: 20px 20px;
+		
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+    }
+
+    @media screen and (max-width: ${windowsSize.small}) {
+      margin-top:10px;
+      min-width: 300px;
+    }
 		
 
     span {
