@@ -91,7 +91,6 @@ export const QuestionBoard = styled.div`
       margin-top:10px;
       min-width: 300px;
     }
-		
 
     span {
       font-size: 1.6rem;
