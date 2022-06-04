@@ -10,7 +10,6 @@ import {incrementIndex} from "../hooks/incrementIndex";
 import {useRowContext} from "../context/rowContext";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 const App: FC = () => {
 	const initialData = {
 		category: 9,
@@ -151,8 +150,6 @@ const App: FC = () => {
 		)
 		// eslint-disable-next-line
 	}, [table])
-	console.log("loading")
-	console.log(loading)
 	return (
 		<>
 			{

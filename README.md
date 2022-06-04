@@ -50,5 +50,9 @@ Now I need to consider store some data in the browser.
 })
 ```
 
+14. ★★★ Important Article about testing React Custom Hooks: [Testing of a Custom React Hook for Fetching Data with Axios
+    ](https://doppelmutzi.github.io/testing-custom-react-hooks/)
+
+15. Downgrade the version of "react-test-renderer": "15.6.2"
 
     
