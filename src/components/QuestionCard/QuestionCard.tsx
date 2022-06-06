@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {AnswerWrapper, NextBtn, ButtonWrapper, QuestionContainer} from './QuestionCard.styles';
-import {useRowContext} from "../../context/rowContext";
+import {useRecordsContext} from "../../context/RecordsContext";
 
 const QuestionCard: FC<CardProps> = ({
 																			 questionNum,
@@ -17,7 +17,8 @@ const QuestionCard: FC<CardProps> = ({
 		userAnswers,
 		number,
 		questions
-	} = useRowContext()
+	} = useRecordsContext()
+
 	return (
 		<QuestionContainer>
 			<p className="number">Question:{questionNum} / {totalQuestions} </p>

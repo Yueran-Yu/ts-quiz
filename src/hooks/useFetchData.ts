@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react'
 import axios from "axios"
 import {shuffleArray} from "../Helper/shuffleArray"
-import {useRowContext} from "../context/rowContext"
+import {useRecordsContext} from "../context/RecordsContext"
 
 const useFetchData = ({amount, type, difficulty, category}: FormProps): FetchData => {
 	const [data, setData] = useState<QuestionProps[]>([])
 	const [err, setErr] = useState<string>('')
-	const {setLoading} = useRowContext() || {}
+	const {setLoading} = useRecordsContext() || {}
 
 	useEffect(() => {
 		const options = {

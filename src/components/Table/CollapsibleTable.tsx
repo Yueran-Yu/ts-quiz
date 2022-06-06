@@ -1,10 +1,10 @@
 import React from 'react';
 import {TableContainer, Paper, Table, TableHead, TableBody, TableRow, TableCell} from "./index";
 import Row from "./Row";
-import {useRowContext} from "../../context/rowContext";
+import {useRecordsContext} from "../../context/RecordsContext";
 
 export const CollapsibleTable = () => {
-	const {parentRecords} = useRowContext()
+	const {parentRecords} = useRecordsContext()
 	return (
 		<TableContainer component={Paper}>
 			<Table aria-label="collapsible table">

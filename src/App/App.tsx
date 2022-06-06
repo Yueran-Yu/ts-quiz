@@ -7,8 +7,12 @@ import {useLocalStorage} from "../hooks/useLocalStorage";
 import LeaderBoard from "../components/LeaderBoard/LeaderBoard";
 import {useBeforeunload} from "react-beforeunload";
 import {incrementIndex} from "../hooks/incrementIndex";
-import {useRowContext} from "../context/rowContext";
+import {useRecordsContext} from "../context/RecordsContext";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {updateTable} from "../Helper/updateTable"
+import {updateRows} from "../Helper/updateRows"
+import {getAllScoresFromOneDay, getAvg, getHighest, getLowest} from "../Helper/updateRecords"
+
 
 const App: FC = () => {
 	const initialData = {
@@ -17,6 +21,7 @@ const App: FC = () => {
 		type: 'boolean',
 		difficulty: 'easy'
 	}
+
 	const [formData, setFormData] = useLocalStorage<FormProps>("formData", initialData)
 	const {err, data} = useFetchData(formData)
 	const [score, setScore] = useState<number>(0)
@@ -36,7 +41,7 @@ const App: FC = () => {
 		setRows,
 		setTable,
 		setParentRecords
-	} = useRowContext()
+	} = useRecordsContext()
 
 	const startGame = () => {
 		setLoading(true)
@@ -83,32 +88,18 @@ const App: FC = () => {
 
 	useEffect(() => {
 		if (questions.length > 0 && number === questions.length) {
-			const obj = {
+			const key = new Date().toLocaleDateString()
+			const newRow = {
 				id: incrementIndex(),
-				createdAt: new Date().toLocaleString(),
+				createdAt: key,
 				category: formData.category,
 				type: formData.type,
 				difficulty: formData.difficulty,
 				score: score,
 				totalNumber: formData.amount
 			}
-			setRows(rows => [...rows, {...obj}])
-			const key = new Date().toLocaleDateString()
-			setTable(table => {
-					let result = {} as ParentRowProps
-					let keysLength = Object.keys(table).length
-
-					if (keysLength > 10) {
-						while (Object.keys(table).length > 10) {
-							let temp = Object.keys(table).shift() as string
-							delete table[temp]
-							result = {...table, [key]: [...rows.filter(r => r.createdAt.includes(key)), obj]}
-						}
-					} else {
-						result = {...table, [key]: [...rows.filter(r => r.createdAt.includes(key)), obj]}
-					}
-					return result
-				}
+			setRows(rows => updateRows(rows, newRow))
+			setTable(table => updateTable(newRow, key, rows,10, table)
 			)
 		}
 		// eslint-disable-next-line
@@ -116,28 +107,25 @@ const App: FC = () => {
 
 
 	useEffect(() => {
-		table && Object.entries(table).map(([k, v]) => {
-				let origin = v.reduce((acc: number[], {score, totalNumber}) => [...acc, (score / totalNumber)], [])
-				const high = (Math.max(...origin) * 100).toFixed(2)
-				const low = (Math.min(...origin) * 100).toFixed(2)
-				const avg = ((v.reduce((acc: number, {
-					score,
-					totalNumber
-				}) => acc + (score / totalNumber), 0) / v.length) * 100).toFixed(2)
+		table && Object.entries(table).map(([key, subRows]) => {
+				let origin = getAllScoresFromOneDay(subRows)
+				const high = getHighest(origin)
+				const low = getLowest(origin)
+				const avg = getAvg(subRows)
 
 				setParentRecords(prev => {
 					const recordObj = {
-						date: k,
-						frequency: v.length,
+						date: key,
+						frequency: subRows.length,
 						highest: high,
 						lowest: low,
 						average: avg
 					}
 
-					let res = prev.find(p => p.date === k)
+					let res = prev.find(p => p.date === key)
 					if (res) {
 						res.average = avg
-						res.frequency = v.length
+						res.frequency = subRows.length
 						res.highest = high
 						res.lowest = low
 						return [...prev]

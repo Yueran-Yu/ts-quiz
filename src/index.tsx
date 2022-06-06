@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App/App';
 import {ErrorBoundary} from './ErrorBoundary';
 import {GlobalStyle} from './global.styles';
-import {RowsProvider} from "./context/rowContext";
+import {RowsProvider} from "./context/RecordsContext";
 
 ReactDOM.render(
 	<React.StrictMode>

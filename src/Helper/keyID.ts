@@ -1,0 +1,1 @@
+export const KeyID = () => new Date().toLocaleDateString()
