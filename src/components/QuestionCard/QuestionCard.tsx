@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {AnswerWrapper, NextBtn, ButtonWrapper, QuestionContainer} from './QuestionCard.styles';
-import {useRowContext} from "../../context/rowContext";
+import {useRecordsContext} from "../../context/RecordsContext";
 
 const QuestionCard: FC<CardProps> = ({
 																			 questionNum,
@@ -17,7 +17,8 @@ const QuestionCard: FC<CardProps> = ({
 		userAnswers,
 		number,
 		questions
-	} = useRowContext()
+	} = useRecordsContext()
+
 	return (
 		<QuestionContainer>
 			<p className="number">Question:{questionNum} / {totalQuestions} </p>
@@ -36,7 +37,6 @@ const QuestionCard: FC<CardProps> = ({
 				)}
 			</AnswerWrapper>
 			<p className="question_bottom"> </p>
-
 			<NextBtn>{
 				//1. game is not over
 				//2. game is not loading
@@ -46,7 +46,7 @@ const QuestionCard: FC<CardProps> = ({
 				!loading &&
 				userAnswers.length === number + 1 &&
 				number !== questions.length &&
-        <button className="next_btn" onClick={nextQuestion}>
+        <button role="button" className="next_btn" onClick={nextQuestion}>
 					{number === questions.length - 1 ? "Play Again" : "Next Question"}
         </button>
 			}

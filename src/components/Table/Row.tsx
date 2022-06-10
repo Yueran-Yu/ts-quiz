@@ -12,13 +12,13 @@ import {
 	TableHead,
 	TableBody
 } from "./index";
-import {useRowContext} from "../../context/rowContext";
+import {useRecordsContext} from "../../context/RecordsContext";
 import {Capitalize} from "../../Helper/capitalize";
 import {Categories} from "../../hooks/constraints";
 
 const Row: FC<RowProps> = ({date, frequency, highest, lowest, average}) => {
 	const [open, setOpen] = useState(false)
-	const {table} = useRowContext()
+	const {table} = useRecordsContext()
 	return (
 		<>
 			<TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
